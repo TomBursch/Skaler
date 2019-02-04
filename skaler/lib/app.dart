@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+
+import 'package:skaler/models/models.dart';
 import 'views/views.dart';
+import 'package:skaler/styles/styles.dart';
 
 class SkalerApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -7,9 +10,7 @@ class SkalerApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Skaler',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+      theme: SkalerThemes.appTheme,
       home: HomePage(title: 'Skaler'),
     );
   }
@@ -25,8 +26,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  double baseValue;
-  double scaledValue;
+  ConversionValue baseValue = ConversionValue();
+  ConversionValue scaledValue = ConversionValue();
   bool isBaseSelected = true;
 
   @override
@@ -41,14 +42,18 @@ class _HomePageState extends State<HomePage> {
           child: Row(children: <Widget>[
             Expanded(
               child: ValueView(
+                id: 0,
                 value: baseValue,
                 isSelected: isBaseSelected,
+                onTap: valueViewSelect,
               ),
             ),
             Expanded(
               child: ValueView(
+                id: 1,
                 value: scaledValue,
                 isSelected: !isBaseSelected,
+                onTap: valueViewSelect,
               ),
             )
           ],),
@@ -57,8 +62,65 @@ class _HomePageState extends State<HomePage> {
           flex: 1,
           child: UnitSelector()
         ),
-        Keypad()
+        Expanded(
+          flex: 3,
+          child: Keypad(
+            onEnter: input,
+          )
+        )
       ],)
     );
   }
+
+  void input(Operations op, {int value}){
+    if(op != null){
+      switch(op){
+        case Operations.add:
+        setState(() {
+         _convert(); 
+        });
+        break;
+        case Operations.multiply:
+        break;
+        case Operations.substract:
+        break;
+        case Operations.divide:
+        break;
+        case Operations.decimal:
+        break;
+        case Operations.clear:
+        setState(() {
+         _getSelectedValue().value = 0;
+         _convert();
+        });
+        break;
+        case Operations.number:
+        setState(() {
+         _getSelectedValue().shiftAddNumber(value);
+         _convert();
+        });
+        break;
+      }
+    }
+  }
+
+  void valueViewSelect(int id){
+    setState(() {
+     isBaseSelected = id==0;
+     _getSelectedValue().value = 0;
+     _convert();
+    });
+  }
+
+  void _convert(){
+    _getNotSelectedValue().convertFrom(_getSelectedValue(), isBaseSelected?1/500:500);
+  }
+
+  ConversionValue _getSelectedValue(){
+    return isBaseSelected?baseValue:scaledValue;
+  }
+  ConversionValue _getNotSelectedValue(){
+    return !isBaseSelected?baseValue:scaledValue;
+  }
+
 }
