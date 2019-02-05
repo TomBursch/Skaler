@@ -18,17 +18,21 @@ class ValueView extends StatelessWidget{
         children: <Widget>[
           Container(
             child: Center(
-              child: Text(_getValueString(), style: _getStyle()),
+              child: FittedBox(
+                child: Text(_getValueString(), style: _getStyle()),
+                fit: BoxFit.scaleDown,
+              ),
             ),
             decoration: BoxDecoration(
-              color: SkalerColors.primaryColor,
+              color: isSelected?SkalerColors.accentBackgroundColor:SkalerColors.primaryColor,
               borderRadius: BorderRadius.circular(50.0)
             ),
             constraints: BoxConstraints.expand(),
+            padding: EdgeInsets.all(5),
             margin: EdgeInsets.all(15),
           ),
           Container(
-            child: Center(child: Text((value==null)?"null":value.valueUnit.toString().split('.')[1], style: SkalerStyles.defaultTextStyle.apply(fontSizeFactor: 0.7))),
+            child: Center(child: Text((value==null)?"null":value.valueUnit.toString().split('.')[1].toUpperCase(), style: SkalerStyles.defaultTextStyle.apply(fontSizeFactor: 0.6))),
             decoration: BoxDecoration(
               color: SkalerColors.primaryLightColor,
               borderRadius: BorderRadius.circular(50.0)
@@ -46,6 +50,6 @@ class ValueView extends StatelessWidget{
     return value.value.toInt().toString();
   }
   TextStyle _getStyle(){
-    return isSelected?SkalerStyles.highlightTextStyle:SkalerStyles.defaultTextStyle;
+    return (isSelected?SkalerStyles.highlightTextStyle:SkalerStyles.defaultTextStyle).apply(letterSpacingDelta: -4, fontSizeFactor: 3);
   }
 }

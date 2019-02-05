@@ -3,7 +3,7 @@ import 'colors.dart';
 
 abstract class SkalerThemes{
   static ThemeData appTheme = ThemeData(
-    primaryColor: SkalerColors.accentColor,
+    primaryColor: SkalerColors.primaryColor,
     accentColor: SkalerColors.accentColor,
     backgroundColor: Colors.white,
     buttonTheme: defaultButtonTheme,

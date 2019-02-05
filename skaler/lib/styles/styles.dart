@@ -7,18 +7,22 @@ export 'themes.dart';
 abstract class SkalerStyles{
   static const TextStyle defaultTextStyle = TextStyle(
     color: SkalerColors.textDefault,
+    letterSpacing: 4,
     fontSize: 25,
     fontFamily: "Century Gothic",
   );
 
   static const TextStyle highlightTextStyle = TextStyle(
     color: SkalerColors.accentColor,
-    fontSize: 45,
+    letterSpacing: 4,
+    fontSize: 25,
     fontFamily: "Century Gothic",
+    
   );
 
   static const TextStyle lightTextStyle = TextStyle(
     color: SkalerColors.textLight,
+    letterSpacing: 4,
     fontSize: 25,
     fontFamily: "Century Gothic",
   );
