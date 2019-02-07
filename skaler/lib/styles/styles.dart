@@ -6,7 +6,7 @@ export 'themes.dart';
 
 abstract class SkalerStyles{
   static const TextStyle defaultTextStyle = TextStyle(
-    color: SkalerColors.textDefault,
+    color: SkalerColors.textDark,
     letterSpacing: 4,
     fontSize: 25,
     fontFamily: "Century Gothic",

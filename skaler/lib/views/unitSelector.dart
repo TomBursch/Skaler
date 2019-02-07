@@ -4,24 +4,25 @@ import 'package:skaler/styles/styles.dart';
 
 class UnitSelector extends StatelessWidget{
   final Unit selectedUnit;
+  final List<Unit> availableUnits;
   final void Function(Unit op) onChanged;
   final FixedExtentScrollController scrollController;
 
-  UnitSelector({Key key, this.selectedUnit: Unit.meters, this.onChanged}):scrollController = FixedExtentScrollController(initialItem: selectedUnit.index),super(key: key);
+  UnitSelector({Key key, this.selectedUnit: Unit.meters, this.onChanged, this.availableUnits: Unit.values}):scrollController = FixedExtentScrollController(initialItem: selectedUnit.index),super(key: key);
 
   @override
   Widget build(BuildContext context){
     return Stack(
       children: <Widget>[
         Center(child: Container(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             color: SkalerColors.primaryLightColor,
             border: Border(
               top: BorderSide(color: SkalerColors.primaryColor, width: .6),
               bottom: BorderSide(color: SkalerColors.primaryColor, width: .6)
             )
           ),
-          constraints: BoxConstraints(maxHeight: 20),
+          constraints: const BoxConstraints(maxHeight: 20),
         )),
         NotificationListener(
           onNotification: _onNotification,
@@ -39,7 +40,7 @@ class UnitSelector extends StatelessWidget{
 
   List<Widget> _buildChildren(){
     List<Widget> l = [];
-    for (Unit u in Unit.values) {
+    for (Unit u in availableUnits) {
       l.add(Text(
         u.toString().split('.')[1].toUpperCase(),
         style: selectedUnit == u?SkalerStyles.lightTextStyle.apply(color: SkalerColors.accentColor, fontSizeFactor: .6):SkalerStyles.lightTextStyle.apply(fontSizeFactor: .6),

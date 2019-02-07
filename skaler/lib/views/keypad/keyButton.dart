@@ -32,7 +32,7 @@ class KeyButton extends StatelessWidget{
       case "/": return Operations.divide;
       case "x": return Operations.multiply;
       case "-": return Operations.substract;
-      case "+ =": return Operations.add;
+      case "+=": return Operations.add;
       case ".": return Operations.decimal;
       case "C": return Operations.clear; 
     }

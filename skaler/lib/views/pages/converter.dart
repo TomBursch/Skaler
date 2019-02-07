@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import 'package:skaler/models/models.dart';
 import 'package:skaler/views/views.dart';
-import 'package:skaler/styles/styles.dart';
 
 class Converter extends StatefulWidget {
   final int scale;
@@ -15,7 +14,12 @@ class Converter extends StatefulWidget {
 class _ConverterState extends State<Converter> {
   ConversionValue baseValue = ConversionValue();
   ConversionValue scaledValue = ConversionValue();
+  bool clearOnNextInput = false;
   bool isBaseSelected = true;
+
+  Operations currentOperation = Operations.clear;
+  Operation left;
+  bool isDecimal = false;
 
   @override
   Widget build(BuildContext context) {
@@ -45,6 +49,7 @@ class _ConverterState extends State<Converter> {
         flex: 1,
         child: UnitSelector(
           selectedUnit: _getSelectedValue().valueUnit,
+          availableUnits: Unit.values,
           onChanged: unitSelect,
         )
       ),
@@ -52,6 +57,7 @@ class _ConverterState extends State<Converter> {
         flex: 3,
         child: Keypad(
           onEnter: input,
+          selectedOp: currentOperation,
         )
       )
     ],);
@@ -72,29 +78,38 @@ class _ConverterState extends State<Converter> {
         case Operations.divide:
         break;
         case Operations.decimal:
+          if(clearOnNextInput) setState(() {
+           _getSelectedValue().value = 0; 
+          });
+          isDecimal = true;
         break;
         case Operations.clear:
         setState(() {
          _getSelectedValue().value = 0;
          _convert();
         });
+        isDecimal = false;
         break;
         case Operations.number:
         setState(() {
-         _getSelectedValue().shiftAddNumber(value);
+         if(clearOnNextInput) _getSelectedValue().value = 0;
+         _getSelectedValue().shiftAddNumber(value, isDecimal);
          _convert();
         });
         break;
       }
+      clearOnNextInput = false;
     }
   }
 
   void valueViewSelect(int id){
     setState(() {
      isBaseSelected = id==0;
-     _getSelectedValue().value = 0;
+     currentOperation = Operations.clear;
      _convert();
     });
+    clearOnNextInput = true;
+    isDecimal = false;
   }
 
   void unitSelect(Unit u){
@@ -102,6 +117,7 @@ class _ConverterState extends State<Converter> {
      _getSelectedValue().valueUnit = u;
      _convert();
     });
+    clearOnNextInput = true;
   }
 
   void _convert(){

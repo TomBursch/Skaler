@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'colors.dart';
+import 'styles.dart';
+
 
 abstract class SkalerThemes{
   static ThemeData appTheme = ThemeData(
@@ -7,6 +8,8 @@ abstract class SkalerThemes{
     accentColor: SkalerColors.accentColor,
     backgroundColor: Colors.white,
     buttonTheme: defaultButtonTheme,
+    iconTheme: defaultIconTheme,
+    textTheme: defaultTextTheme,
 
     fontFamily: "Century Gothic"
   );
@@ -18,5 +21,13 @@ abstract class SkalerThemes{
   static ButtonThemeData operationButtonTheme = ButtonThemeData(
     buttonColor: SkalerColors.primaryColor,
     shape: Border.all(width: .3, color: Colors.grey),
+  );
+
+  static IconThemeData defaultIconTheme = IconThemeData(
+    color: SkalerColors.textLight,
+  );
+
+  static TextTheme defaultTextTheme = TextTheme(
+    body1: SkalerStyles.defaultTextStyle,
   );
 }

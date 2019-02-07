@@ -5,3 +5,5 @@ export 'pages/homepage.dart';
 export 'pages/converter.dart';
 export 'pages/options.dart';
 export 'pages/settings.dart';
+export 'scaleItem.dart';
+export 'newScaleSelect.dart';

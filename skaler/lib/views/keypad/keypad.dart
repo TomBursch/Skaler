@@ -3,9 +3,10 @@ import 'keyButton.dart';
 import 'package:skaler/models/models.dart';
 
 class Keypad extends StatelessWidget{
+  final Operations selectedOp;
   final void Function(Operations, {int value}) onEnter;
 
-  Keypad({@required this.onEnter});
+  Keypad({@required this.onEnter, this.selectedOp});
 
   void onKeyPressed(String txt){
     var value = int.tryParse(txt);
@@ -26,7 +27,7 @@ class Keypad extends StatelessWidget{
             KeyButton(text: "7", onPressed: onKeyPressed,),
             KeyButton(text: "8", onPressed: onKeyPressed,),
             KeyButton(text: "9", onPressed: onKeyPressed,),
-            KeyButton(text: "/", onPressed: onKeyPressed,),
+            KeyButton(text: "/", onPressed: onKeyPressed, isSelected: selectedOp == Operations.divide,),
           ],
         )),
         Expanded(child: Row(
@@ -35,7 +36,7 @@ class Keypad extends StatelessWidget{
             KeyButton(text: "4", onPressed: onKeyPressed,),
             KeyButton(text: "5", onPressed: onKeyPressed,),
             KeyButton(text: "6", onPressed: onKeyPressed,),
-            KeyButton(text: "x", onPressed: onKeyPressed,),
+            KeyButton(text: "x", onPressed: onKeyPressed, isSelected: selectedOp == Operations.multiply),
           ],
         )),
         Expanded(child: Row(
@@ -44,7 +45,7 @@ class Keypad extends StatelessWidget{
             KeyButton(text: "1", onPressed: onKeyPressed,),
             KeyButton(text: "2", onPressed: onKeyPressed,),
             KeyButton(text: "3", onPressed: onKeyPressed,),
-            KeyButton(text: "-", onPressed: onKeyPressed,),
+            KeyButton(text: "-", onPressed: onKeyPressed, isSelected: selectedOp == Operations.substract),
           ],
         )),
         Expanded(child: Row(
@@ -53,7 +54,7 @@ class Keypad extends StatelessWidget{
             KeyButton(text: "C", onPressed: onKeyPressed,),
             KeyButton(text: "0", onPressed: onKeyPressed,),
             KeyButton(text: ".", onPressed: onKeyPressed,),
-            KeyButton(text: "+ =", onPressed: onKeyPressed,),
+            KeyButton(text: "+=", onPressed: onKeyPressed, isSelected: selectedOp == Operations.add),
           ],
         ))
       ],
@@ -65,7 +66,7 @@ class Keypad extends StatelessWidget{
       case "/": return Operations.divide;
       case "x": return Operations.multiply;
       case "-": return Operations.substract;
-      case "+ =": return Operations.add;
+      case "+=": return Operations.add;
       case ".": return Operations.decimal;
       case "C": return Operations.clear; 
     }
