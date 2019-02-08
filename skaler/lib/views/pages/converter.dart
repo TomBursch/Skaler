@@ -4,8 +4,8 @@ import 'package:skaler/models/models.dart';
 import 'package:skaler/views/views.dart';
 
 class Converter extends StatefulWidget {
-  final int scale;
-  Converter({Key key, this.scale: 500}) : super(key: key);
+  final Scale scale;
+  Converter({Key key, @required this.scale}) : super(key: key);
 
   @override
   _ConverterState createState() => _ConverterState();
@@ -20,6 +20,13 @@ class _ConverterState extends State<Converter> {
   Operations currentOperation = Operations.clear;
   Operation left;
   bool isDecimal = false;
+
+  @override
+  void didUpdateWidget(Converter oldWidget){
+    super.didUpdateWidget(oldWidget);
+    baseValue.valueUnit = widget.scale.fromMetric?Unit.meters:Unit.feet;
+    scaledValue.valueUnit = widget.scale.toMetric?Unit.meters:Unit.feet;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -49,8 +56,9 @@ class _ConverterState extends State<Converter> {
         flex: 1,
         child: UnitSelector(
           selectedUnit: _getSelectedValue().valueUnit,
-          availableUnits: Unit.values,
+          availableUnits: (isBaseSelected && widget.scale.fromMetric) || (!isBaseSelected && widget.scale.toMetric)?Unit.metricValues:Unit.imperialValues,
           onChanged: unitSelect,
+          isBaseSelected: isBaseSelected,
         )
       ),
       Expanded(
@@ -112,7 +120,7 @@ class _ConverterState extends State<Converter> {
     isDecimal = false;
   }
 
-  void unitSelect(Unit u){
+  void unitSelect(int u){
     setState(() {
      _getSelectedValue().valueUnit = u;
      _convert();
@@ -121,7 +129,7 @@ class _ConverterState extends State<Converter> {
   }
 
   void _convert(){
-    _getNotSelectedValue().convertFrom(_getSelectedValue(), isBaseSelected?1/widget.scale:widget.scale.toDouble());
+    _getNotSelectedValue().convertFrom(_getSelectedValue(), isBaseSelected?1/widget.scale.scaler:widget.scale.scaler.toDouble());
   }
 
   ConversionValue _getSelectedValue(){

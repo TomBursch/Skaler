@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:skaler/styles/styles.dart';
-import 'package:skaler/models/conversionValue.dart';
+import 'package:skaler/models/models.dart';
 
 class ValueView extends StatelessWidget{
   final int id;
@@ -32,7 +32,7 @@ class ValueView extends StatelessWidget{
             margin: EdgeInsets.all(15),
           ),
           Container(
-            child: Center(child: Text((value==null)?"null":value.valueUnit.toString().split('.')[1].toUpperCase(), style: SkalerStyles.defaultTextStyle.apply(fontSizeFactor: 0.6))),
+            child: Center(child: Text((value==null)?"null":Unit.getString(value.valueUnit).toUpperCase(), style: SkalerStyles.defaultTextStyle.apply(fontSizeFactor: 0.6))),
             decoration: BoxDecoration(
               color: SkalerColors.primaryLightColor,
               borderRadius: BorderRadius.circular(50.0)

@@ -64,14 +64,14 @@ class SaveData{
   void _listFromJson(Map<String,dynamic> m){
     list = [];
     for(int i = 0; i < m.length; i++){
-      list.add(Scale(m["$i"] as int));
+      list.add(Scale.fromJson(m["$i"] as Map<String,dynamic>));
     }
   }
 
   Map<String,dynamic> _listToJson(){
     Map<String,dynamic> m = {};
     for(int i = 0;i<list.length;i++){
-      m["$i"] = list[i].scaler;
+      m["$i"] = list[i].toJson();
     }
     return m;
   }

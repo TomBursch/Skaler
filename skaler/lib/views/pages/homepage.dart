@@ -36,7 +36,7 @@ class _HomePageState extends State<HomePage> {
       body: Stack(
         children: <Widget>[
           Container(
-            child: Converter(scale: _getSelectedScaler(),),
+            child: Converter(scale: _getSelectedScaler()),
             margin: EdgeInsets.only(top: 80),
           ),
           Visibility(child: GestureDetector(onTap: _toggleOptions), visible: (openPercentage>80),),
@@ -69,7 +69,7 @@ class _HomePageState extends State<HomePage> {
                                 removeScale: removeScale,
                                 scaleList: scaleList,
                               ):
-                              Center(child: Text("1:${_getSelectedScaler()}", style: SkalerStyles.defaultTextStyle,))),
+                              Center(child: Text("1:${_getSelectedScaler().scaler}", style: SkalerStyles.defaultTextStyle,))),
                 GestureDetector(
                   onVerticalDragUpdate: _dragUpdate,
                   onVerticalDragEnd: _dragEnd,
@@ -107,9 +107,9 @@ class _HomePageState extends State<HomePage> {
     widget.storage.save(SaveData(selectedScale, scaleList));
   }
 
-  int _getSelectedScaler(){
-    if(scaleList != null && scaleList.length > 0 && selectedScale >= 0 && selectedScale<scaleList.length && scaleList[selectedScale] != null) return scaleList[selectedScale].scaler;
-    return 1;
+  Scale _getSelectedScaler(){
+    if(scaleList != null && scaleList.length > 0 && selectedScale >= 0 && selectedScale<scaleList.length && scaleList[selectedScale] != null) return scaleList[selectedScale];
+    return Scale(1);
   }
 
 

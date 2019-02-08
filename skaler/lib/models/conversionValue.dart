@@ -1,7 +1,8 @@
+import 'models.dart';
 
 class ConversionValue {
   double value = 0;
-  Unit valueUnit = Unit.meters;
+  int valueUnit = Unit.meters;
 
   ConversionValue({this.value: 0, this.valueUnit: Unit.meters});
 
@@ -24,7 +25,7 @@ class ConversionValue {
 
   //Private Functions
 
-  double _getFactor(Unit u){
+  double _getFactor(int u){
     switch(u){
       case Unit.kilometers: return 1000;
       case Unit.meters: return 1;
@@ -33,11 +34,4 @@ class ConversionValue {
     }
     return 1;
   }
-}
-
-enum Unit{
-  kilometers,
-  meters,
-  centimeters,
-  millimeters
 }
