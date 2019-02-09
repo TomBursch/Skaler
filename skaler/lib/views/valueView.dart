@@ -51,6 +51,10 @@ class ValueView extends StatelessWidget{
   }
   String _getValueString(){
     if(value==null) return "error";
+    if(value.value%1>0 && !isSelected){
+      //#TODO...
+      return value.value.toStringAsFixed(4).replaceAll(RegExp("0"), " ").trimRight().replaceAll(RegExp(" "), "0");
+    }
     if(value.value%1>0) return value.value.toString();
     return value.value.toInt().toString();
   }
