@@ -58,10 +58,12 @@ class _HomePageState extends State<HomePage> {
             alignment: Alignment(0, 0),
             duration: Duration(milliseconds: 200),
             curve: Curves.decelerate,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+            child: Stack(
+              alignment: Alignment.bottomCenter,
               children: <Widget>[
-                Expanded(child: (openPercentage==100.0)?
+                Container(
+                  constraints: BoxConstraints.expand(),
+                  child: (openPercentage==100.0)?
                               Options(
                                 selectedScale: selectedScale,
                                 selectScale: selectScale,
@@ -69,15 +71,20 @@ class _HomePageState extends State<HomePage> {
                                 removeScale: removeScale,
                                 scaleList: scaleList,
                               ):
-                              Center(child: Text("1:${_getSelectedScaler().scaler}", style: SkalerStyles.defaultTextStyle,))),
+                              Transform.translate(
+                                offset: const Offset(0, -5),
+                                child: Center(child: Text("1:${_getSelectedScaler().scaler}", style: SkalerStyles.defaultTextStyle,))
+                              )
+                ),
                 GestureDetector(
                   onVerticalDragUpdate: _dragUpdate,
                   onVerticalDragEnd: _dragEnd,
                   onTap: _toggleOptions,
                   child: Container(
+                    alignment: Alignment.bottomCenter,
                     child: RotationTransition(child: Icon(Icons.arrow_drop_down), turns: AlwaysStoppedAnimation(openPercentage/200),),
                     decoration: BoxDecoration(),
-                    constraints: BoxConstraints(minWidth: double.infinity),
+                    constraints: BoxConstraints(minWidth: double.infinity, maxHeight: 56),
                 ))
               ],
             ),

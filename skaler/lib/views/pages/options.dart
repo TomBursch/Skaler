@@ -37,7 +37,7 @@ class _OptionsState extends State<Options>{
         Expanded(child: ListView.builder(
           controller: ScrollController(initialScrollOffset: widget.selectedScale*(MediaQuery.of(context).size.width*0.8 + 20)),
           scrollDirection: Axis.horizontal,
-          padding: EdgeInsets.only(bottom: 50, top: 30),
+          padding: EdgeInsets.only(bottom: 50, top: 20),
           physics: BouncingScrollPhysics(),
           itemCount: widget.scaleList.length+(widget.scaleList.length>0?2:0),
           itemBuilder: (context, index) {

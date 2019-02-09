@@ -37,7 +37,10 @@ class ScaleItem extends StatelessWidget{
             ),
             Align(
               alignment: Alignment.topCenter,
-              child: Text("${scale.fromMetric?"metric":"imperial"} to ${scale.toMetric?"metric":"imperial"}", style: SkalerStyles.lightTextStyle,),
+              child: FittedBox(
+                fit: BoxFit.scaleDown,
+                child: Text("${scale.fromMetric?"metric":"imperial"} to ${scale.toMetric?"metric":"imperial"}", style: SkalerStyles.lightTextStyle,),
+              )
             )
           ],
         ),

@@ -26,6 +26,7 @@ class _ConverterState extends State<Converter> {
     super.didUpdateWidget(oldWidget);
     baseValue.valueUnit = widget.scale.fromMetric?Unit.meters:Unit.feet;
     scaledValue.valueUnit = widget.scale.toMetric?Unit.meters:Unit.feet;
+    _convert();
   }
 
   @override
@@ -62,7 +63,7 @@ class _ConverterState extends State<Converter> {
         )
       ),
       Expanded(
-        flex: 3,
+        flex: 4,
         child: Keypad(
           onEnter: input,
           selectedOp: currentOperation,

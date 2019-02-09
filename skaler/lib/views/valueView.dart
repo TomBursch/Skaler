@@ -29,10 +29,15 @@ class ValueView extends StatelessWidget{
             ),
             constraints: BoxConstraints.expand(),
             padding: EdgeInsets.all(5),
-            margin: EdgeInsets.all(15),
+            margin: EdgeInsets.fromLTRB(15, 15, 15, 10),
           ),
           Container(
-            child: Center(child: Text((value==null)?"null":Unit.getString(value.valueUnit).toUpperCase(), style: SkalerStyles.defaultTextStyle.apply(fontSizeFactor: 0.6))),
+            child: Center(child: FittedBox(
+              fit: BoxFit.scaleDown,
+              child: Text((value==null)?"null":Unit.getString(value.valueUnit).toUpperCase(),
+                style: SkalerStyles.defaultTextStyle.apply(fontSizeFactor: 0.6)
+              )
+            )),
             decoration: BoxDecoration(
               color: SkalerColors.primaryLightColor,
               borderRadius: BorderRadius.circular(50.0)
