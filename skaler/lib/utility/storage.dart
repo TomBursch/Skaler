@@ -3,13 +3,15 @@ import 'dart:io';
 import 'dart:convert';
 import 'package:path_provider/path_provider.dart';
 import 'package:skaler/models/models.dart';
-import 'package:flutter/material.dart';
 
-class Storage {
-  static final Storage storage = Storage._internal();
+abstract class Storage{
+  static final Storage storage = Storagetxt();
+  
+  Future<SaveData> load();
+  Future<File> save(SaveData data);
+}
 
-  factory Storage(){return storage;}
-  Storage._internal();
+class Storagetxt extends Storage {
 
   Future<String> get _localPath async {
     final directory = await getApplicationDocumentsDirectory();

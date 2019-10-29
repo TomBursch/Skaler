@@ -5,13 +5,12 @@ import 'package:skaler/styles/styles.dart';
 import 'package:skaler/utility/utility.dart';
 
 class SkalerApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Skaler',
       theme: SkalerThemes.appTheme,
-      home: HomePage(storage: Storage()),
+      home: HomePage(storage: Storage.storage),
       debugShowCheckedModeBanner: false,
     );
   }

@@ -1,5 +1,5 @@
 name: skaler
-description: A scaling app
+description: Scale
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
@@ -15,15 +15,19 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  path_provider: ^0.5.0
-
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
+  
+  path_provider: ^0.5.0
+  flutter_bloc: ^0.15.0
+  equatable: ^0.2.4
+  sliding_up_panel: ^0.3.6
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_launcher_icons: "^0.7.3"
 
 
 # For information on the generic Dart part of this file, see the
@@ -64,11 +68,3 @@ flutter:
           weight: 700
         - asset: fonts/GOTHICB.ttf
           weight: 700
-  #   - family: Trajan Pro
-  #     fonts:
-  #       - asset: fonts/TrajanPro.ttf
-  #       - asset: fonts/TrajanPro_Bold.ttf
-  #         weight: 700
-  #
-  # For details regarding fonts from package dependencies,
-  # see https://flutter.io/custom-fonts/#from-packages
