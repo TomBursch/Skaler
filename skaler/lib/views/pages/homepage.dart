@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:skaler/bloc/home/bloc.dart';
 import 'package:skaler/models/models.dart';
+import 'package:skaler/views/appbar.dart';
 import 'package:skaler/views/views.dart';
 import 'package:skaler/styles/styles.dart';
 import 'package:skaler/utility/utility.dart';
@@ -41,6 +42,8 @@ class _HomePageState extends State<HomePage> {
             margin: EdgeInsets.only(top: 80),
           ),
           panel: Options(),
+          collapsedReplaces: true,
+          collapsed: SAppBar(),
         ),
       ),
     );

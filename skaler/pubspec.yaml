@@ -22,7 +22,10 @@ dependencies:
   path_provider: ^0.5.0
   flutter_bloc: ^0.15.0
   equatable: ^0.2.4
-  sliding_up_panel: ^0.3.6
+  sliding_up_panel:
+    path: ../../sliding_up_panel/
+    #git: 
+      #url: https://github.com/TomBursch/sliding_up_panel.git
 
 dev_dependencies:
   flutter_test:
@@ -60,11 +63,11 @@ flutter:
   fonts:
     - family: Century Gothic
       fonts:
-        - asset: fonts/GOTHIC.ttf
-        - asset: fonts/GOTHICI.ttf
+        - asset: fonts/GOTHIC.TTF
+        - asset: fonts/GOTHICI.TTF
           style: italic
-        - asset: fonts/GOTHICBI.ttf
+        - asset: fonts/GOTHICBI.TTF
           style: italic
           weight: 700
-        - asset: fonts/GOTHICB.ttf
+        - asset: fonts/GOTHICB.TTF
           weight: 700
